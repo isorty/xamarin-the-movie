@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"             
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:TheMovie.Converters;assembly=TheMovie"
+             xmlns:controls="clr-namespace:TheMovie.Controls;assembly=TheMovie"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"    
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="TheMovie.Views.MovieDetailPage"
+             BackgroundColor="{DynamicResource WindowBackground}"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Icon="ic_grade_white"
+            Text="Favourite" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter" />
+            <converters:NegateBooleanConverter x:Key="inverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout>
+            <controls:CardView>
+                <StackLayout Spacing="0">
+                    <StackLayout Margin="10">
+                        <Image Source="{Binding Movie.ImageSource}"
+                            Aspect="AspectFill"
+                            HorizontalOptions="Center" />
+                        
+                        <Label Text="Title" FontSize="Medium" FontAttributes="Bold"/>
+                        <Label AutomationId="LabelTitle" Text="{Binding Movie.Title}" FontSize="Small"/>
+
+                        <Label Text="Rating" FontSize="Medium" FontAttributes="Bold"/>
+                        <Label Text="{Binding Movie.Rating}" FontSize="Small"/>
+                    </StackLayout>
+                </StackLayout>
+            </controls:CardView>
+            <controls:CardView>
+                <StackLayout Margin="10">
+                    <Label Text="Year" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding Movie.Year}" FontSize="Small"/>
+
+                    <Label Text="Genres" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding Movie.Genre}" FontSize="Small"/>
+
+                    <Label Text="Actors" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding Movie.Actors}" FontSize="Small"/>
+
+                    <Label Text="Director" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding Movie.Director}" FontSize="Small"/>
+                </StackLayout>
+            </controls:CardView>
+            <controls:CardView>
+                <StackLayout Margin="10">
+                    <Label Text="Description" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding Movie.Description}" FontSize="Small"/>
+                </StackLayout>
+            </controls:CardView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

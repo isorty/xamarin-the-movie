@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:controls="clr-namespace:TheMovie.Controls;assembly=TheMovie"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheMovie.Cells.MovieCell">
+    <ContentView.Content>
+        <controls:CardView 
+            Margin="0,3"
+            HeightRequest="80">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout 
+                    Grid.Column="0"
+                    VerticalOptions="Center"
+                    Margin="5"
+                    Orientation="Vertical">
+                    <Label Text="{Binding Rating}"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListItemTextStyle}"
+                        FontSize="30"
+                        FontAttributes="Bold"/>
+                </StackLayout>
+                <StackLayout 
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    Margin="5"
+                    Orientation="Vertical">
+                    <Label Text="{Binding Title}"
+                        AutomationId="LabelTitle"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListItemTextStyle}"
+                        FontSize="20"
+                        FontAttributes="Italic"/>
+                    <Label Text="{Binding Description}"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListItemTextStyle}"
+                        FontSize="15"/>
+                </StackLayout>
+            </Grid>
+        </controls:CardView>
+    </ContentView.Content>
+</ContentView>
