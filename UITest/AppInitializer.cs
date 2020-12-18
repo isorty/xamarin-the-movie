@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
-namespace TheMovie.UITest
+namespace UITest
 {
     public class AppInitializer
     {
@@ -14,13 +12,11 @@ namespace TheMovie.UITest
             {
                 return ConfigureApp
                     .Android
-                    .InstalledApp("com.jairzjunior.themovie")
+                    .ApkFile("C:\\Users\\Pavel\\source\\repos\\xamarin-the-movie-master\\TheMovie\\TheMovie.Android\\bin\\Release\\com.jairzjunior.themovie.apk")
                     .StartApp();
             }
 
-            return ConfigureApp
-                .iOS
-                .StartApp();
+            return ConfigureApp.iOS.StartApp();
         }
     }
 }

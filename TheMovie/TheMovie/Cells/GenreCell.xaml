@@ -23,19 +23,9 @@
                         Style="{DynamicResource ListItemTextStyle}"
                         FontSize="16"
                         FontAttributes="Bold"/>
-                    <!--<Label Text="{Binding Amount}"                        
-                        LineBreakMode="NoWrap"
-                        Style="{DynamicResource ListItemDetailTextStyle}"
-                        FontSize="13"/>
-                        <Label Text="{Binding GenresNames}"
-                        AutomationId="LabelTitle"
-                        LineBreakMode="WordWrap"
-                        Style="{DynamicResource ListItemDetailTextStyle}"
-                        FontSize="13"/>-->
                 </StackLayout>
                 <StackLayout Grid.Column="2" VerticalOptions="Center">
-                    <Label Text="{Binding Amount}" 
-                        AutomationId="LabelTitle"
+                    <Label Text="{Binding Amount}"
                         LineBreakMode="NoWrap"
                         Style="{DynamicResource ListItemTextStyle}"
                         VerticalTextAlignment="Center"
