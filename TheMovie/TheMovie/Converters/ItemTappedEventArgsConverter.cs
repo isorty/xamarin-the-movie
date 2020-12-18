@@ -8,12 +8,11 @@ namespace TheMovie.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var itemTappedEventArgs = value as ItemTappedEventArgs;
-			if (itemTappedEventArgs == null)
-			{
-				throw new ArgumentException($"Expected value to be of type {nameof(ItemTappedEventArgs)}", nameof(value));
-			}
-			return itemTappedEventArgs.Item;
+            if (!(value is ItemTappedEventArgs itemTappedEventArgs))
+            {
+                throw new ArgumentException($"Expected value to be of type {nameof(ItemTappedEventArgs)}", nameof(value));
+            }
+            return itemTappedEventArgs.Item;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
