@@ -4,12 +4,31 @@ using Microsoft.AppCenter.Crashes;
 using Prism.DryIoc;
 using Prism.Ioc;
 using TheMovie.Views;
+using TheMovie.SQLite;
 using Xamarin.Forms;
+using System.IO;
+using System;
 
 namespace TheMovie
 {
     public partial class App : PrismApplication
     {
+        public const string DATABASE_NAME = "movies.db";
+        public static MovieAsyncRepository database;
+        public static MovieAsyncRepository Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new MovieAsyncRepository(
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME));
+                }
+                return database;
+            }
+        }
+
         protected override void OnInitialized()
         {
             InitializeComponent();
@@ -28,14 +47,7 @@ namespace TheMovie
 
         protected override void OnStart()
         {
-            base.OnStart();            
-            //AppCenter.Start(
-            //    "android=0c100be3-d3e4-4653-b602-8efe90e6ef2f;" +
-            //    "uwp=c10a525c-3170-4504-a567-aec798cc7be9;" +
-            //    "ios=22a3003b-75e6-4058-a798-ad45a8e0d6a6;",
-            //    typeof(Analytics), 
-            //    typeof(Crashes)                
-            //);
+            base.OnStart();
         }
     }
 }

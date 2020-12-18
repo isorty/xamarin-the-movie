@@ -12,7 +12,8 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Icon="ic_grade_white"
-            Text="Favourite" />
+            Text="Favourite" 
+            Command="{Binding AddToFavouritesCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>

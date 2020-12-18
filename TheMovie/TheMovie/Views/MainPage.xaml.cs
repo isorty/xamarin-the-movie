@@ -1,6 +1,4 @@
 ﻿using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace TheMovie.Views
@@ -11,6 +9,12 @@ namespace TheMovie.Views
         public MainPage()
         {
             InitializeComponent();
-        }        
+        }
+
+        protected override async void OnAppearing()
+        {
+            await App.Database.CreateTable();
+            base.OnAppearing();
+        }
     }
 }

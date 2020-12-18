@@ -1,9 +1,12 @@
-﻿using Prism.Navigation;
+﻿using Prism.Commands;
+using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using TheMovie.Models;
+using Xamarin.Forms;
 
 namespace TheMovie.ViewModels
 {
@@ -25,9 +28,13 @@ namespace TheMovie.ViewModels
             set { SetProperty(ref movie, value); }
         }
 
+        public DelegateCommand AddToFavouritesCommand { get; }
+
         public MovieDetailPageViewModel()
         {
             Images = new List<Xamarin.Forms.Image>();
+
+            AddToFavouritesCommand = new DelegateCommand(async () => await ExecuteAddToFavouritesCommand());
         }   
 
         public async void OnNavigatingTo(INavigationParameters parameters)
@@ -53,6 +60,53 @@ namespace TheMovie.ViewModels
                 }
                 Movie = movieDetail;
                 Movie.ImageSource = Images[0].Source;
+            }
+        }
+
+        private async Task ExecuteAddToFavouritesCommand()
+        {
+            if (IsBusy)
+            {
+                Debug.WriteLine("was busy and returned");
+                return;
+            }
+            IsBusy = true;
+            try
+            {
+                var shortMovie = new ShortMovie()
+                {
+                    Id = Movie.Id,
+                    Title = Movie.Title,
+                    Rating = Movie.Rating,
+                    Description = Movie.Description
+                };
+                await AddToFavouritesAsync(shortMovie).ConfigureAwait(false);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private async Task AddToFavouritesAsync(ShortMovie movie)
+        {
+            bool isExist = true;
+            try
+            {
+                var tmp = await App.Database.GetItemAsync(movie.Id);
+                var result = await App.Database.DeleteItemAsync(movie);
+                if (result > 0)
+                    await App.Current.MainPage.DisplayAlert("Favourites", "Deleted from favourites", "Ok");
+            }
+            catch
+            {
+                isExist = false;
+            }
+            if (!isExist)
+            {
+                var result = await App.Database.SaveItemAsync(movie);
+                if (result > 0)
+                    await App.Current.MainPage.DisplayAlert("Favourites", "Added to favourites", "Ok");
             }
         }
     }
